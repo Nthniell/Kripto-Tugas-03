@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kripto Chat</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="auth-panel" id="authPanel">
+        <div class="brand">
+          <p>II4021 Kriptografi</p>
+          <h1>Kripto Chat</h1>
+        </div>
+        <div class="tabs" role="tablist">
+          <button class="tab active" id="loginTab" type="button">Login</button>
+          <button class="tab" id="registerTab" type="button">Register</button>
+        </div>
+        <form id="authForm" class="form">
+          <label>
+            Email
+            <input id="emailInput" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            Password
+            <input id="passwordInput" type="password" autocomplete="current-password" required />
+          </label>
+          <button class="primary" id="authSubmit" type="submit">Login</button>
+          <p class="status" id="authStatus"></p>
+        </form>
+      </section>
+
+      <section class="chat-app hidden" id="chatApp">
+        <aside class="sidebar">
+          <div class="account">
+            <span id="currentUser"></span>
+            <button id="logoutButton" type="button">Logout</button>
+          </div>
+          <div class="sidebar-head">
+            <h2>Kontak</h2>
+            <button id="refreshContacts" type="button" title="Refresh kontak">↻</button>
+          </div>
+          <div class="contacts" id="contacts"></div>
+        </aside>
+        <section class="conversation">
+          <header class="conversation-head">
+            <div>
+              <p>Chat dengan</p>
+              <h2 id="activeContact">Pilih kontak</h2>
+            </div>
+            <span class="crypto-badge" id="cryptoBadge">ECDH + HKDF + AES-256-GCM</span>
+          </header>
+          <div class="messages" id="messages"></div>
+          <form class="composer" id="messageForm">
+            <textarea id="messageInput" rows="2" placeholder="Tulis pesan terenkripsi..." disabled></textarea>
+            <button class="primary" id="sendButton" type="submit" disabled>Kirim</button>
+          </form>
+          <p class="status" id="chatStatus"></p>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

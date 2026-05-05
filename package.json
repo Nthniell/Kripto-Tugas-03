@@ -1,0 +1,19 @@
+{
+  "name": "kripto-tugas-03",
+  "version": "1.0.0",
+  "description": "Aplikasi chat web dengan JWT ECDSA, ECDH, HKDF, AES-256, dan MAC.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "cryptography",
+    "jwt",
+    "ecdh",
+    "webcrypto",
+    "chat"
+  ],
+  "author": "",
+  "license": "MIT"
+}

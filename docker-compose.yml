@@ -1,0 +1,13 @@
+services:
+  kripto-chat:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - kripto-chat-data:/app/data
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+
+volumes:
+  kripto-chat-data:
