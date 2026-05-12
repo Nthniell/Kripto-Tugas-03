@@ -111,6 +111,7 @@ async function deriveConversationKeys(contact) {
     []
   );
   const sharedBits = await crypto.subtle.deriveBits({ name: 'ECDH', public: publicKey }, state.privateKey, 256);
+  console.log(`Shared Secret ${state.email} <-> ${contact.email}:`,bytesToBase64(sharedBits));
   const hkdfKey = await crypto.subtle.importKey('raw', sharedBits, 'HKDF', false, ['deriveKey']);
   const salt = roomSalt(state.email, contact.email);
   const aesKey = await crypto.subtle.deriveKey(
