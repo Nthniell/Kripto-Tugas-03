@@ -161,24 +161,30 @@ async function encryptMessage(plaintext) {
 }
 
 async function decryptMessage(message) {
-  const macOk = await crypto.subtle.verify(
-    'HMAC',
-    state.activeKeys.macKey,
-    base64ToBytes(message.mac),
-    macInput(message)
-  );
-  if (!macOk) {
-    return { text: '[MAC tidak valid]', invalid: true };
+  let macOk = false;
+  try {
+    macOk = await crypto.subtle.verify(
+      'HMAC',
+      state.activeKeys.macKey,
+      base64ToBytes(message.mac),
+      macInput(message)
+    );
+  } catch (error) {
+    macOk = false;
   }
+
   try {
     const plaintext = await crypto.subtle.decrypt(
       { name: 'AES-GCM', iv: base64ToBytes(message.iv) },
       state.activeKeys.aesKey,
       base64ToBytes(message.ciphertext)
     );
+    if (!macOk) {
+      return { text: '[MAC tidak valid]', invalid: true };
+    }
     return { text: dec.decode(plaintext), invalid: false };
   } catch (error) {
-    return { text: '[Pesan tidak dapat didekripsi]', invalid: true };
+    return { text: '[pesan tidak dapat di dekripsi]', invalid: true };
   }
 }
 

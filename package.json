@@ -1,7 +1,7 @@
 {
   "name": "kripto-tugas-03",
   "version": "1.0.0",
-  "description": "Aplikasi chat web dengan JWT ECDSA, ECDH, HKDF, AES-256, dan MAC.",
+  "description": "Pembuatan Aplikasi Chat Web dengan Kriptografi Kunci-Simetri dan Kunci-Publik.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
