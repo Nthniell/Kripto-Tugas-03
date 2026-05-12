@@ -253,6 +253,7 @@ async function selectContact(contact) {
   $('sendButton').disabled = false;
   setStatus($('chatStatus'), 'Membentuk kunci komunikasi...');
   state.activeKeys = await deriveConversationKeys(contact);
+  console.log('active keys:', state.activeKeys);
   setStatus($('chatStatus'), 'Kunci komunikasi siap. Server hanya menerima ciphertext dan MAC.');
   renderContacts();
   await loadMessages();
