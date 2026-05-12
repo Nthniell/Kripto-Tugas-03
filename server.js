@@ -122,15 +122,21 @@ function authenticate(req) {
     throw new Error('Missing bearer token');
   }
   const publicKey = fs.readFileSync(PUBLIC_KEY_PATH, 'utf8');
-  const decoded = verify({
-    jwt: token,
-    publicKey,
-    options: {
-      algs: ['ES256'],
-      iss: 'kripto-tugas-03',
-      aud: 'kripto-chat'
-    }
-  });
+  let decoded;
+  try {
+    decoded = verify({
+      jwt: token,
+      publicKey,
+      options: {
+        algs: ['ES256'],
+        iss: 'kripto-tugas-03',
+        aud: 'kripto-chat'
+      }
+    });
+  } catch (error) {
+    console.error(`[auth] JWT verification failed: ${error.message}`);
+    throw new Error(`JWT verification failed: ${error.message}`);
+  }
   const db = readDb();
   const user = db.users.find((item) => item.email === decoded.payload.sub);
   if (!user) {
