@@ -49,10 +49,4 @@ docker compose up --build
 - `HOST`: host bind server, default `127.0.0.1`. Untuk Docker gunakan `0.0.0.0`.
 - Data pengguna, pesan, dan key JWT server tersimpan di folder `data/`.
 
-## Catatan Kriptografi
 
-- Private key ECDH dibuat di browser saat registrasi, diekspor sebagai PKCS#8, lalu dienkripsi dengan AES-256-GCM. Kunci AES untuk private key diturunkan dari password menggunakan PBKDF2 SHA-256 dengan salt unik.
-- Password untuk autentikasi server tidak disimpan sebagai plainteks. Server menyimpan hash `scrypt` dan salt unik.
-- Shared secret ECDH dihitung di browser menggunakan kurva P-256. Hasilnya diproses dengan HKDF SHA-256 untuk menghasilkan kunci AES-256-GCM dan kunci HMAC-SHA-256 per pasangan pengguna.
-- Server hanya menyimpan dan meneruskan ciphertext, IV, MAC, timestamp, dan metadata pengirim/penerima.
-- JWT diimplementasikan sebagai JWS compact serialization: `base64url(header).base64url(payload).base64url(signature)`.
